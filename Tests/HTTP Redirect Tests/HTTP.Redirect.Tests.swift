@@ -3,16 +3,24 @@ import HTTP_Standard
 import Server
 import Testing
 
-@Suite("HTTP redirect policies")
-struct RedirectTests {
-    private static func headers(_ fields: [(String, String)]) -> HTTP.Headers {
-        HTTP.Headers(
-            fields.map { name, value in
-                HTTP.Header.Field(name: .init(name), value: .init(unchecked: value))
-            }
-        )
-    }
+extension Redirect {
+    @Suite("HTTP redirect policies")
+    struct Test {
+        @Suite struct Unit {}
+        @Suite struct `Edge Case` {}
+        @Suite struct Integration {}
 
+        fileprivate static func headers(_ fields: [(String, String)]) -> HTTP.Headers {
+            HTTP.Headers(
+                fields.map { name, value in
+                    HTTP.Header.Field(name: .init(name), value: .init(unchecked: value))
+                }
+            )
+        }
+    }
+}
+
+extension Redirect.Test.Unit {
     @Test
     func `canonical host`() async throws(Server.Error) {
         let middleware = Redirect.Canonical(host: "www.example.com")
@@ -20,7 +28,7 @@ struct RedirectTests {
             method: .get,
             path: ["docs", "intro"],
             query: "page=2",
-            headers: Self.headers([
+            headers: Redirect.Test.headers([
                 ("Host", "example.com"),
                 ("X-Forwarded-Proto", "https"),
             ])
@@ -42,7 +50,7 @@ struct RedirectTests {
         let request = Server.Request(
             method: .get,
             path: ["docs"],
-            headers: Self.headers([("Host", "www.example.com")])
+            headers: Redirect.Test.headers([("Host", "www.example.com")])
         )
 
         let response = try await middleware.intercept(request) { _ in
@@ -58,7 +66,7 @@ struct RedirectTests {
         let request = Server.Request(
             method: .get,
             path: ["login"],
-            headers: Self.headers([
+            headers: Redirect.Test.headers([
                 ("Host", "example.com"),
                 ("X-Forwarded-Proto", "http"),
             ])
@@ -80,7 +88,7 @@ struct RedirectTests {
         let request = Server.Request(
             method: .get,
             path: [],
-            headers: Self.headers([
+            headers: Redirect.Test.headers([
                 ("Host", "example.com"),
                 ("X-Forwarded-Proto", "https"),
             ])
