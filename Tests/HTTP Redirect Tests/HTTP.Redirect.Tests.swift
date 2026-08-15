@@ -41,7 +41,10 @@ extension Redirect.Test.Unit {
         #expect(response.status == .movedPermanently)
         // swift-linter:disable:next raw value access
         // REASON: the test verifies the serialized Location header at the protocol boundary.
-        #expect(response.headers.first("Location")?.rawValue == "https://www.example.com/docs/intro?page=2")
+        #expect(
+            response.headers.first("Location")?.rawValue
+                == "https://www.example.com/docs/intro?page=2"
+        )
     }
 
     @Test
@@ -101,6 +104,9 @@ extension Redirect.Test.Unit {
         #expect(response.status == .ok)
         // swift-linter:disable:next raw value access
         // REASON: the test verifies the RFC 6797 field serialization at the protocol boundary.
-        #expect(response.headers.first("Strict-Transport-Security")?.rawValue == "max-age=31536000; includeSubDomains")
+        #expect(
+            response.headers.first("Strict-Transport-Security")?.rawValue
+                == "max-age=31536000; includeSubDomains"
+        )
     }
 }
