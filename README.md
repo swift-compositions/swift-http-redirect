@@ -11,7 +11,7 @@ Two `Server` middlewares that permanently redirect requests to HTTPS and to a ca
 ```swift
 dependencies: [
     .package(
-        url: "https://github.com/swift-foundations/swift-http-redirect.git",
+        url: "https://github.com/swift-compositions/swift-http-redirect.git",
         branch: "main"
     )
 ]

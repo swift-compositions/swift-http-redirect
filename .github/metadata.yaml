@@ -2,7 +2,7 @@
 # Triaged by AI-assisted bulk pass (2026-04-29).
 description: "HTTP redirect response handling (3xx status codes and Location header) for Swift."
 topics:
-  - foundations
+  - compositions
   - http
 homepage: "https://swift-institute.org"
 readme:

@@ -14,7 +14,7 @@ let package = Package(
         .library(name: "HTTP Redirect", targets: ["HTTP Redirect"])
     ],
     dependencies: [
-        .package(url: "https://github.com/swift-foundations/swift-server.git", branch: "main"),
+        .package(url: "https://github.com/swift-compositions/swift-server.git", branch: "main"),
         .package(url: "https://github.com/swift-standards/swift-http-standard.git", branch: "main"),
         .package(url: "https://github.com/swift-ietf/swift-rfc-6797.git", branch: "main"),
     ],
